@@ -1,0 +1,21 @@
+<view class="mycontainer">
+  <view class="split">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+  </view>
+  <view class="split">
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+  <view class="split">
+    <text>{{quiz.q}}</text>
+  </view>
+  <view class="split">
+    <radio-group class="radio-group" bindchange="radioChange">
+      <label class="radios" wx:for="{{items}}">
+        <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+      </label>
+    </radio-group>
+  </view>
+  <view class="button-area">
+    <button class="button" bindtap="bindButtonConfirm">{{button}}</button>
+  </view>
+</view>
