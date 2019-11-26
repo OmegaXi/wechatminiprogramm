@@ -6,12 +6,18 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  margin-top: 25px;
 }
 
 .userinfo {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.choices {
+  margin-top: 10px;
+  /* margin-left: 60px; */
 }
 
 .userinfo-avatar {
@@ -27,6 +33,18 @@
 
 .split {
   margin-top: 10px;
+}
+
+.page {
+  text-align: right;
+  margin-right:15px;
+  margin-top: 10px;
+}
+
+.question{
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .button-area {

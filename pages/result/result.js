@@ -1,169 +1,130 @@
-// pages/quiz/quiz.js
-const app = getApp()
-
-
+// pages/result/result.js
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    userInfo: {},
-    button: '确认',
-    hint: '',
-    k: 0, //题目编号,从〇开始
-    score: 0,
-    sequence:'',
-    sequence2:'',
-    questions: [],
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    choice: '',
+    score: 0,quiz:'',choice:'', wquestion:'', choiceArr:[],
+    explaination8: "您答对了超过八题，您有很强的保险意识",
+    explaination5:"您答对了超过五题，您的保险意识不错",
+    explaination3:"您答对了超过三题，您的保险意识还有待提高",
+    explaination0:"您答对的题数少于三，请再接再厉"
   },
-  radioChange: function (e) {
+  
+  onLoad: function (options) {
+    if (options.score) {
+      this.setData({
+        score: options.score
+      });
+    }
+    if (options.quiz) {
+      this.setData({
+        quiz: options.quiz
+      });
+    }
+    if (options.choice) {
+      this.setData({
+        choice: options.choice
+      });
+    }
+    let quiz = this.data.quiz;
+    let choice = this.data.choice;
+    let quizArr = []
+    for(let i=0;i<20;i=i+2) {
+      if (quiz[i]=="0") {
+        quizArr.push(parseInt(quiz[i+1]));
+      } else {
+        quizArr.push(parseInt(quiz[i]+quiz[i+1]));
+      }
+    }
+    let choiceArr = [];
+    for(let j=0;j<10;j=j+1){
+      if(choice[j]== '0'){
+        choiceArr.push(quizArr[j]);
+      }
+    }
     this.setData({
-      choice : e.detail.value
+      choiceArr: choiceArr
     })
   },
-  bindButtonConfirm: function () { //答题确认
-    let k = this.data.k; //题号
-    let score = this.data.score; //分数
-    let sequence = this.data.sequence;
-    let sequence2 = this.data.sequence2;
-    let that = this;
-    if (k >= 9) { //若这是最后一题
-      if (this.data.questions[k].rightChoice == this.data.choice) {
-        score = score + 1;
-        sequence = sequence + "1";
-        wx.redirectTo({
-          url: '../result/result?score=' + score + '&quiz=' + sequence2 + '&choice=' + sequence
-        });
-      } else if (this.data.choice == '') {
-        wx.showToast({
-          title: '请选择一个答案',
-          image: '../../image/question.png',
-          duration: 800,
-          mask: true
-        });
-      } else {
-        sequence = sequence + "0";
-        wx.redirectTo({
-          url: '../result/result?score=' + score + '&quiz=' + sequence2 + '&choice=' + sequence
-        });
-      }
-    } else { //若不是最后一题
-      if (this.data.questions[k].rightChoice == this.data.choice) {
-        that.setData({
-          score: score + 1
-        });
-        if (this.data.k != 9) {
-          sequence = sequence + "1";
-          this.setData({
-            k: k + 1,
-            choice: '',
-            sequence: sequence
-          });
-        }
-      } else if (this.data.choice == ""){
-        wx.showToast({
-          title: '请选择一个答案',
-          image: '../../image/question.png',
-          duration: 800,
-          mask: true
-        });
-      } else {
-        if (this.data.k != 9) {
-          sequence = sequence + "0";
-          this.setData({
-            choice: '',
-            k: k + 1,
-            sequence: sequence
-          });
-        }
-      }
-    }
-  },
-  onLoad: function () { //载入后动作
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-    let arr = goRandom();
-    let quiz = [];
-    let idstr = '';
-    for (let i=0;i<10;i++) {
-      quiz.push(question[arr[i]]);
-      idstr = idstr + numTransfer(arr[i]);
-    }
-    console.log(quiz);
-    this.setData({
-     questions: quiz,
-     sequence2: idstr 
-    });
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+
   },
+
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
   },
+
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+
   },
+
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+
   },
+
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+
   },
+
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+
   },
+
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
   },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+  confirm: function () {
     this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      nameInput: this.data.name,
+      phoneInput: this.data.phone,
+    });
+  },
+  nameInput: function(e) {
+    this.setData({
+      name: e.detail.value
+    });
+  },
+  phoneInput: function(e) {
+    this.setData({
+      phone: e.detail.value
+    });
+  },
+  bindButtonConfirm: function() {
+    let choiceArr = this.data.choiceArr;
+    let str = '';
+    for (let i=0;i<choiceArr.length;i++) {
+      let k = choiceArr[i];
+      str = str + question[k].quiz + '\n' + question[k].choice[0].value + '\n' + question[k].choice[1].value + '\n' + question[k].choice[2].value + '\n' + question[k].choice[3].value + '\n' + '正确答案为' + question[k].rightChoice + '\n\n';
+    }
+    this.setData({
+      wquestion: str
     })
   }
 })
-
 let question = [
   {
     id: 1,
@@ -471,28 +432,3 @@ let question = [
     rightChoice: 'D'
   }
 ]
-function goRandom() {
-  let arr1 = new Array();
-  let arr2 = new Array();
-  for (let i = 0; i < 30; i++) {
-    arr1.push(i);
-  }
-  for (let k = 0; k < 10; k++) {
-    let id = Math.ceil(Math.random() * 29);
-    if (arr2.indexOf(arr1[id]) === -1) {
-      arr2.push(arr1[id]);
-    } else {
-      k = k - 1;
-      continue;
-    }
-  }
-  return arr2;
-}
-
-function numTransfer(param) {
-  if (param < 10) {
-    return "0" + param.toString();
-  } else {
-    return param.toString();
-  }
-}

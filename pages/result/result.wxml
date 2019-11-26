@@ -1,0 +1,22 @@
+<!--pages/result/result.wxml-->
+<view class="mycontainer">
+  <text>你答对了{{score}}题</text>
+</view>
+<view class="split" wx:if="{{score>=8}}">
+  <text class="text">{{explaination8}}\n</text>
+</view>
+<view class="split" wx:elif="{{score>=5}}">
+<text class="text">{{explaination5}}\n</text>
+</view>
+<view class="split" wx:elif="{{score>=3}}">
+<text class="text">{{explaination3}}\n</text>
+</view>
+<view class="split" wx:else>
+<text class="text">{{explaination0}}\n</text>
+</view>
+<view class="button-area">
+    <button class="button" bindtap="bindButtonConfirm"> 查看错题 </button>
+</view>
+<view class="split">
+<text class="text">{{wquestion}}\n</text>
+</view>

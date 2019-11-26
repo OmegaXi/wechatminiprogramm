@@ -1,21 +1,21 @@
+<view class="page">
+    <text>第{{k+1}}/10题</text>
+  </view>
 <view class="mycontainer">
-  <view class="split">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+  <view class="question">
+    <text>{{questions[k].quiz}}</text>
   </view>
-  <view class="split">
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>
-  <view class="split">
-    <text>{{quiz.q}}</text>
-  </view>
-  <view class="split">
+  <view class="choices">
     <radio-group class="radio-group" bindchange="radioChange">
-      <label class="radios" wx:for="{{items}}">
+      <label class="radios" wx:for="{{questions[k].choice}}" wx:key="unique">
         <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
       </label>
     </radio-group>
   </view>
   <view class="button-area">
     <button class="button" bindtap="bindButtonConfirm">{{button}}</button>
+  </view>
+  <view class="split" style="font-size: 10px; text-align: center;">
+    <text>{{hint}}</text>
   </view>
 </view>

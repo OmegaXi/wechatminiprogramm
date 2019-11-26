@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  margin-top: 50px;
 }
 
 .userinfo {
@@ -26,7 +27,7 @@
 }
 
 .usermotto {
-  margin-top: 100px;
+  margin-top: 25px;
 }
 
 .button {

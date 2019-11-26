@@ -18,17 +18,10 @@ Page({
       url: '../logs/logs'
     })
   },
-  bindButtonUseless: function(e) {
-    console.log(e)
-    console.log(!hasUserInfo && canIUse)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+  bindButtonUseless: function() {
     wx.navigateTo({
       url: '../quiz/quiz'
-    })
+    });
   },
   onLoad: function () { //载入后动作
     if (app.globalData.userInfo) {
@@ -59,6 +52,11 @@ Page({
     }
   },
   getUserInfo: function(e) {
-    
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
   }
 })
